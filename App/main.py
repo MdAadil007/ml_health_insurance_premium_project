@@ -336,6 +336,7 @@ def prepare_features(inputs: dict, model, scaler_data) -> pd.DataFrame:
 
     expected_cols = get_expected_columns(model)
     df = df.reindex(columns=expected_cols, fill_value=0)
+    df = df.astype(float)  # Fix: ensure all columns are float to avoid dtype conflict
 
     scaler = scaler_data["scaler"]
     scale_cols = [c for c in scaler_data["cols_to_scale"] if c in df.columns]
